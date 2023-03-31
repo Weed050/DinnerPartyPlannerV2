@@ -42,7 +42,8 @@ namespace DinnerPartyPlannerV2
             get
             {
                 decimal cost = base.Cost;
-                cost = CalculateBeveragesCost();
+                cost += CalculateBeveragesCost();
+                if (NumberOfPeople > 12) cost += 100M;
                 if (HealthyOption)
                 {
                     cost *= 0.95M;
@@ -56,6 +57,7 @@ namespace DinnerPartyPlannerV2
             HealthyOption = healthyOption;
             NumberOfPeople = numberOfPeople;
             FancyDecorations = fancyDecorations;
+
         }
         private decimal CalculateBeveragesCost()
         {
@@ -72,21 +74,19 @@ namespace DinnerPartyPlannerV2
         public string CakeWriting;
         public bool CakeWritingToLong;
         public int MaxLengthWriting;
-        public int WritingLength 
-        { 
-            get {
-                if (WritingLength > MaxLengthWriting) return MaxLengthWriting;
-                else return WritingLength;
-                    }
-        }
+        public int CakeWritinLength;
+        
         public override decimal Cost
         {
             get
             {
                 decimal cost = base.Cost;
+                // cake cost (3 lines)
                 if (CakeSize() == 20) cost += 40M;
                 else cost += 75M;
-                cost += (WritingLength * 0.25M);
+                CakeToLong();
+                cost += (CakeWritinLength * 0.25M);
+                if (NumberOfPeople > 12) cost += 100M;
                 // dokończyć, napewno brakuje if(NumberOfPeople > 12) cost += 100M;
                 return cost;
             }
@@ -99,19 +99,25 @@ namespace DinnerPartyPlannerV2
             else
                 return 40; // 75zł
         }
-        private bool CakeToLong()
+        public bool CakeToLong()
         {
             if (CakeSize() == 20)
                 MaxLengthWriting = 16;
             else
                 MaxLengthWriting = 40;
             if (CakeWriting.Length > MaxLengthWriting)
-
+            {
+                CakeWritinLength = MaxLengthWriting;
                 return true;
+            }
             else
+            {
+                CakeWritinLength = CakeWriting.Length;
                 return false;
-        }
+            }
 
+        }
+       
         public BirthDayParty(int numberOfPeople, bool fancyDecorations, string cakeWriting) : base(numberOfPeople, fancyDecorations)
         {
             FancyDecorations = fancyDecorations;

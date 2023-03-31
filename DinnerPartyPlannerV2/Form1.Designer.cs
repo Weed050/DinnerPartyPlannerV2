@@ -30,20 +30,21 @@
         {
             Imprezy = new TabControl();
             tabPage1 = new TabPage();
+            labelCost1 = new Label();
+            label2 = new Label();
+            fancyDecorations1 = new CheckBox();
             healthyOption = new CheckBox();
             numberOfPepleSet1 = new NumericUpDown();
             label1 = new Label();
             tabPage2 = new TabPage();
-            fancyDecorations = new CheckBox();
-            label2 = new Label();
-            labelCost1 = new Label();
+            labelWritingToLong = new Label();
+            cakeWritingLabel = new TextBox();
+            label6 = new Label();
             labelCost2 = new Label();
             label4 = new Label();
             fancyDecorations2 = new CheckBox();
             numberOfPepleSet2 = new NumericUpDown();
             label5 = new Label();
-            label6 = new Label();
-            cakeWritingLabel = new TextBox();
             Imprezy.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numberOfPepleSet1).BeginInit();
@@ -65,7 +66,7 @@
             // 
             tabPage1.Controls.Add(labelCost1);
             tabPage1.Controls.Add(label2);
-            tabPage1.Controls.Add(fancyDecorations);
+            tabPage1.Controls.Add(fancyDecorations1);
             tabPage1.Controls.Add(healthyOption);
             tabPage1.Controls.Add(numberOfPepleSet1);
             tabPage1.Controls.Add(label1);
@@ -77,15 +78,47 @@
             tabPage1.Text = "Imprezy";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // labelCost1
+            // 
+            labelCost1.AutoSize = true;
+            labelCost1.Location = new Point(88, 158);
+            labelCost1.Name = "labelCost1";
+            labelCost1.Size = new Size(17, 20);
+            labelCost1.TabIndex = 5;
+            labelCost1.Text = "0";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(28, 158);
+            label2.Name = "label2";
+            label2.Size = new Size(54, 20);
+            label2.TabIndex = 4;
+            label2.Text = "Razem";
+            // 
+            // fancyDecorations1
+            // 
+            fancyDecorations1.AutoSize = true;
+            fancyDecorations1.Location = new Point(28, 114);
+            fancyDecorations1.Name = "fancyDecorations1";
+            fancyDecorations1.Size = new Size(175, 24);
+            fancyDecorations1.TabIndex = 3;
+            fancyDecorations1.Text = "dodatkowe dekoracje";
+            fancyDecorations1.UseVisualStyleBackColor = true;
+            fancyDecorations1.CheckedChanged += fancyDecorations1_CheckedChanged;
+            // 
             // healthyOption
             // 
             healthyOption.AutoSize = true;
+            healthyOption.Checked = true;
+            healthyOption.CheckState = CheckState.Checked;
             healthyOption.Location = new Point(28, 84);
             healthyOption.Name = "healthyOption";
             healthyOption.Size = new Size(140, 24);
             healthyOption.TabIndex = 2;
             healthyOption.Text = "zdrowe jedzenie";
             healthyOption.UseVisualStyleBackColor = true;
+            healthyOption.CheckedChanged += healthyOption_CheckedChanged;
             // 
             // numberOfPepleSet1
             // 
@@ -94,6 +127,7 @@
             numberOfPepleSet1.Size = new Size(150, 27);
             numberOfPepleSet1.TabIndex = 1;
             numberOfPepleSet1.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            numberOfPepleSet1.ValueChanged += numberOfPepleSet1_ValueChanged;
             // 
             // label1
             // 
@@ -106,6 +140,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(labelWritingToLong);
             tabPage2.Controls.Add(cakeWritingLabel);
             tabPage2.Controls.Add(label6);
             tabPage2.Controls.Add(labelCost2);
@@ -121,38 +156,42 @@
             tabPage2.Text = "Imprezy urodzinowe";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // fancyDecorations
+            // labelWritingToLong
             // 
-            fancyDecorations.AutoSize = true;
-            fancyDecorations.Location = new Point(28, 114);
-            fancyDecorations.Name = "fancyDecorations";
-            fancyDecorations.Size = new Size(175, 24);
-            fancyDecorations.TabIndex = 3;
-            fancyDecorations.Text = "dodatkowe dekoracje";
-            fancyDecorations.UseVisualStyleBackColor = true;
+            labelWritingToLong.AutoSize = true;
+            labelWritingToLong.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelWritingToLong.ForeColor = SystemColors.ActiveCaptionText;
+            labelWritingToLong.Location = new Point(55, 171);
+            labelWritingToLong.Name = "labelWritingToLong";
+            labelWritingToLong.Size = new Size(128, 20);
+            labelWritingToLong.TabIndex = 14;
+            labelWritingToLong.Text = "ZA DŁUGI NAPIS";
+            labelWritingToLong.Visible = false;
             // 
-            // label2
+            // cakeWritingLabel
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(28, 158);
-            label2.Name = "label2";
-            label2.Size = new Size(54, 20);
-            label2.TabIndex = 4;
-            label2.Text = "Razem";
+            cakeWritingLabel.BackColor = SystemColors.HighlightText;
+            cakeWritingLabel.BorderStyle = BorderStyle.FixedSingle;
+            cakeWritingLabel.Location = new Point(24, 130);
+            cakeWritingLabel.Name = "cakeWritingLabel";
+            cakeWritingLabel.Size = new Size(184, 27);
+            cakeWritingLabel.TabIndex = 13;
+            cakeWritingLabel.Text = "Sto lat!";
+            cakeWritingLabel.TextChanged += cakeWritingLabel_TextChanged;
             // 
-            // labelCost1
+            // label6
             // 
-            labelCost1.AutoSize = true;
-            labelCost1.Location = new Point(88, 158);
-            labelCost1.Name = "labelCost1";
-            labelCost1.Size = new Size(17, 20);
-            labelCost1.TabIndex = 5;
-            labelCost1.Text = "0";
+            label6.AutoSize = true;
+            label6.Location = new Point(24, 98);
+            label6.Name = "label6";
+            label6.Size = new Size(112, 20);
+            label6.TabIndex = 12;
+            label6.Text = "Napis na torcie:";
             // 
             // labelCost2
             // 
             labelCost2.AutoSize = true;
-            labelCost2.Location = new Point(104, 182);
+            labelCost2.Location = new Point(193, 202);
             labelCost2.Name = "labelCost2";
             labelCost2.Size = new Size(17, 20);
             labelCost2.TabIndex = 11;
@@ -161,7 +200,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(44, 182);
+            label4.Location = new Point(133, 202);
             label4.Name = "label4";
             label4.Size = new Size(54, 20);
             label4.TabIndex = 10;
@@ -176,6 +215,7 @@
             fancyDecorations2.TabIndex = 9;
             fancyDecorations2.Text = "dodatkowe dekoracje";
             fancyDecorations2.UseVisualStyleBackColor = true;
+            fancyDecorations2.CheckedChanged += fancyDecorations2_CheckedChanged;
             // 
             // numberOfPepleSet2
             // 
@@ -184,6 +224,7 @@
             numberOfPepleSet2.Size = new Size(150, 27);
             numberOfPepleSet2.TabIndex = 7;
             numberOfPepleSet2.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            numberOfPepleSet2.ValueChanged += numberOfPepleSet2_ValueChanged;
             // 
             // label5
             // 
@@ -193,24 +234,6 @@
             label5.Size = new Size(78, 20);
             label5.TabIndex = 6;
             label5.Text = "Ilość ludzi:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(24, 98);
-            label6.Name = "label6";
-            label6.Size = new Size(112, 20);
-            label6.TabIndex = 12;
-            label6.Text = "Napis na torcie:";
-            // 
-            // cakeWritingLabel
-            // 
-            cakeWritingLabel.BackColor = SystemColors.HighlightText;
-            cakeWritingLabel.BorderStyle = BorderStyle.FixedSingle;
-            cakeWritingLabel.Location = new Point(24, 130);
-            cakeWritingLabel.Name = "cakeWritingLabel";
-            cakeWritingLabel.Size = new Size(184, 27);
-            cakeWritingLabel.TabIndex = 13;
             // 
             // Form1
             // 
@@ -240,7 +263,7 @@
         private TabPage tabPage2;
         private Label labelCost1;
         private Label label2;
-        private CheckBox fancyDecorations;
+        private CheckBox fancyDecorations1;
         private Label label6;
         private Label labelCost2;
         private Label label4;
@@ -248,5 +271,6 @@
         private NumericUpDown numberOfPepleSet2;
         private Label label5;
         private TextBox cakeWritingLabel;
+        private Label labelWritingToLong;
     }
 }
