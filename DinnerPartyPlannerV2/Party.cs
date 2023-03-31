@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DinnerPartyPlannerV2
 {
-    internal class Party
+    public class Party
     {
         public const int CostOfFoodPerPerson = 25;
         public int NumberOfPeople;
-        private bool FancyDecorations { get; set; }
+        public bool FancyDecorations;
         public virtual decimal Cost
         {
             get
@@ -42,14 +42,20 @@ namespace DinnerPartyPlannerV2
             get
             {
                 decimal cost = base.Cost;
-                cost = 
+                cost = CalculateBeveragesCost();
+                if (HealthyOption)
+                {
+                    cost *= 0.95M;
+                }
                 return cost;
             }
         }
 
-        public DinnerParty(int numberOfPeople,bool fancyDecorations,bool healthyOption):base(numberOfPeople,fancyDecorations)
+        public DinnerParty(int numberOfPeople, bool fancyDecorations, bool healthyOption) : base(numberOfPeople, fancyDecorations)
         {
             HealthyOption = healthyOption;
+            NumberOfPeople = numberOfPeople;
+            FancyDecorations = fancyDecorations;
         }
         private decimal CalculateBeveragesCost()
         {
@@ -59,6 +65,59 @@ namespace DinnerPartyPlannerV2
                 return cost = (base.NumberOfPeople * 5M);
             else
                 return cost = (base.NumberOfPeople * 20M);
+        }
+    }
+    public class BirthDayParty : Party
+    {
+        public string CakeWriting;
+        public bool CakeWritingToLong;
+        public int MaxLengthWriting;
+        public int WritingLength 
+        { 
+            get {
+                if (WritingLength > MaxLengthWriting) return MaxLengthWriting;
+                else return WritingLength;
+                    }
+        }
+        public override decimal Cost
+        {
+            get
+            {
+                decimal cost = base.Cost;
+                if (CakeSize() == 20) cost += 40M;
+                else cost += 75M;
+                cost += (WritingLength * 0.25M);
+                // dokończyć, napewno brakuje if(NumberOfPeople > 12) cost += 100M;
+                return cost;
+            }
+        }
+
+        private decimal CakeSize()
+        {
+            if (NumberOfPeople <= 4)
+                return 20; // 40zł
+            else
+                return 40; // 75zł
+        }
+        private bool CakeToLong()
+        {
+            if (CakeSize() == 20)
+                MaxLengthWriting = 16;
+            else
+                MaxLengthWriting = 40;
+            if (CakeWriting.Length > MaxLengthWriting)
+
+                return true;
+            else
+                return false;
+        }
+
+        public BirthDayParty(int numberOfPeople, bool fancyDecorations, string cakeWriting) : base(numberOfPeople, fancyDecorations)
+        {
+            FancyDecorations = fancyDecorations;
+            NumberOfPeople = numberOfPeople;
+            CakeWriting = cakeWriting;
+
         }
     }
 }
