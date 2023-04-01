@@ -16,6 +16,7 @@ namespace DinnerPartyPlannerV2
             get
             {
                 decimal cost = NumberOfPeople * CostOfFoodPerPerson;
+                if (NumberOfPeople > 12) cost += 100M;
                 return cost + CostOfDecorations();
             }
         }
@@ -43,7 +44,6 @@ namespace DinnerPartyPlannerV2
             {
                 decimal cost = base.Cost;
                 cost += CalculateBeveragesCost();
-                if (NumberOfPeople > 12) cost += 100M;
                 if (HealthyOption)
                 {
                     cost *= 0.95M;
@@ -86,7 +86,6 @@ namespace DinnerPartyPlannerV2
                 else cost += 75M;
                 CakeToLong();
                 cost += (CakeWritinLength * 0.25M);
-                if (NumberOfPeople > 12) cost += 100M;
                 // dokończyć, napewno brakuje if(NumberOfPeople > 12) cost += 100M;
                 return cost;
             }
