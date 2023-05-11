@@ -35,7 +35,7 @@ namespace DinnerPartyPlannerV2
 
         }
     }
-    public class DinnerParty : Party
+    abstract public class DinnerParty : Party
     {
         public bool HealthyOption;
         public override decimal Cost
